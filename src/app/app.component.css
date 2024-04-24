@@ -1,0 +1,18 @@
+/*Header*/
+.fila-header {
+    padding: 8px;
+    display:flex;
+    align-items: center;
+}
+.icono{
+    width: 80px;
+}
+i {
+    font-size: 40px;
+}
+.padding-top-elementos-medios {
+    padding-top: 15px;
+}
+.alinear-derecha {
+    float:right;
+}
