@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { InicioComponent } from './modules/inicio/pages/inicio/inicio.component';
+import { ProductosModule } from './modules/productos/productos.module';
 
 const routes: Routes = [
   //ruta simple que nos lleva a un solo componente
@@ -10,7 +11,8 @@ const routes: Routes = [
   //then =  promesas=funciones asincronicas (espera la confirmacion de internet o del exterior)
   //si hay error o no algo te va a devolver
   //()=> nos importa la ruta de donde viene el modulo
-  {path:"",loadChildren:()=>import('./modules/inicio/inicio.module').then(m=>m.InicioModule)}
+  {path:"",loadChildren:()=>import('./modules/inicio/inicio.module').then(m=>m.InicioModule)},
+  {path:"",loadChildren:()=>import('./modules/productos/productos.module').then(m=>m.ProductosModule)}
 ];
 
 @NgModule({
