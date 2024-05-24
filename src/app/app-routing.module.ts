@@ -12,7 +12,8 @@ const routes: Routes = [
   //si hay error o no algo te va a devolver
   //()=> nos importa la ruta de donde viene el modulo
   {path:"",loadChildren:()=>import('./modules/inicio/inicio.module').then(m=>m.InicioModule)},
-  {path:"",loadChildren:()=>import('./modules/productos/productos.module').then(m=>m.ProductosModule)}
+  {path:"",loadChildren:()=>import('./modules/productos/productos.module').then(m=>m.ProductosModule)},
+  {path:"",loadChildren:()=>import('./modules/atentificacion/atentificacion.module').then(m=>m.AtentificacionModule)}
 ];
 
 @NgModule({
