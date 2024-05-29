@@ -5,31 +5,38 @@
         <!--nombre de usuario-->
         <mat-form-field appearance="fill">
             <mat-label>Ingrese nombre de usuario:</mat-label>
-            <input matInput placeholder="Placeholder">
+            <input matInput placeholder="Placeholder" required>
             <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-            
+
         </mat-form-field>
         <!--apellido de usuario-->
         <mat-form-field appearance="fill">
             <mat-label>Ingrese apellido de usuario:</mat-label>
-            <input matInput placeholder="Placeholder">
+            <input matInput placeholder="Placeholder" required>
             <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-           
+
         </mat-form-field>
         <!--email del usuario-->
         <mat-form-field appearance="fill">
             <mat-label>Ingrese el mail del usuario:</mat-label>
-            <input matInput placeholder="Placeholder">
+            <input matInput placeholder="Placeholder" required>
             <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-           
+
         </mat-form-field>
         <!--contraseña de usuario-->
         <mat-form-field>
             <mat-label>Enter your password</mat-label>
-            <input matInput [type]="hide ? 'password' : 'text'">
-            <button mat-icon-button matSuffix (click)="clickEvent($event)" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            <!--de esta manera se oculta la contraseña con el hide password-->
+            <input matInput [type]="hide ? 'password' : 'text'" #input minlength="6" required>
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
             </button>
-          </mat-form-field>
+            <!--muestra la cantidad de caracteres con el input.value.length-->
+            <mat-hint align="start">Mínimo:6/{{input.value.length}}</mat-hint>
+        </mat-form-field>
+        <!--boton para enviar la información-->
+        <button mat-raised-button color="primary" class="boton">Registrarte</button>
     </div>
+
 </div>

@@ -7,8 +7,5 @@ import { Component } from '@angular/core';
 })
 export class RegistroComponent {
   hide = true;
-  clickEvent(event: MouseEvent) {
-    this.hide = !this.hide;
-    event.stopPropagation();
-  }
+  
 }

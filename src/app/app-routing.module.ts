@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { InicioComponent } from './modules/inicio/pages/inicio/inicio.component';
-import { ProductosModule } from './modules/productos/productos.module';
+// import { ProductosModule } from './modules/productos/productos.module';
 
 const routes: Routes = [
   //ruta simple que nos lleva a un solo componente
