@@ -1,33 +1,46 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+//Archivos de ruta
 import { AtentificacionRoutingModule } from './atentificacion-routing.module';
-import { AtentificacionComponent } from './atentificacion.component';
+//componentes
 import { RegistroComponent } from './pages/registro/registro.component';
 import { IniciosesionComponent } from './pages/iniciosesion/iniciosesion.component';
-/* Componentes de material */
+// Componentes de material
 import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatButtonModule} from '@angular/material/button';
+import {MatSelectModule} from '@angular/material/select';
+
+//componentes de angular
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
-    AtentificacionComponent,
     RegistroComponent,
     IniciosesionComponent
   ],
   imports: [
     CommonModule,
     AtentificacionRoutingModule,
+    //material
     MatIconModule,
     MatInputModule,
     MatFormFieldModule,
-    MatButtonModule
+    MatButtonModule,
+    MatSelectModule,
+    //angular
+    FormsModule
   ],
   exports: [
     RegistroComponent,
-    IniciosesionComponent
+    IniciosesionComponent,
+    MatIconModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatButtonModule,
+    MatSelectModule,
+
   ]
 })
 export class AtentificacionModule { }

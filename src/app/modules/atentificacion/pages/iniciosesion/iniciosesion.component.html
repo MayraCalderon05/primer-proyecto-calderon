@@ -1,1 +1,22 @@
-<p>iniciosesion works!</p>
+<div class="container">
+  <div class="row">
+    <h1>Iniciar sesión</h1>
+    <i class="material-icons" style="font-size: 150px;">account_circle</i>
+    <!--email de usuario-->
+    <mat-form-field appearance="fill">
+      <mat-label>Complete su email:</mat-label>
+      <input matInput placeholder="Placeholder" required >
+    </mat-form-field>
+    <!--contraseña del usuario-->
+    <mat-form-field>
+      <mat-label>Ingresa tu contraseña</mat-label>
+      <input matInput [type]="hide ? 'password' : 'text'" required>
+      <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hide">
+        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+    </mat-form-field>
+    <!--boton para enviar la información-->
+    <button mat-raised-button color="accent" class="boton">Iniciar sesión</button>
+  </div>
+</div>
