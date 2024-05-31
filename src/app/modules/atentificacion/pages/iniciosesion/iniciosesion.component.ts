@@ -48,6 +48,12 @@ export class IniciosesionComponent {
   ]
 
   iniciarSesion(){
-    
+    for (let i = 0; i < this.sesionUsuarios.length; i++) {
+      if ((this.usuarioIngresa.email === this.sesionUsuarios[i].email) && (this.usuarioIngresa.password === this.sesionUsuarios[i].password)) {
+        alert("Usted ha iniciado sesión")
+      } else {
+        alert("Los datos son incorrectos")
+      }
+    }
   }
 }
