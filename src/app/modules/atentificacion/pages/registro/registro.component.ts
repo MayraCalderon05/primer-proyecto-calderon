@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AppModule } from 'src/app/app.module';
 //importa la interfaz de usuario
 import { Usuario } from 'src/app/models/usuario';
 
@@ -35,9 +36,22 @@ export class RegistroComponent {
     }
     //enviamos los nuevos registros por medio del metodo push a la coleccion
     this.coleccionUsuarios.push(credenciales);
-
+    alert("te registraste correctamente")
     //por consola
-    console.log(credenciales);
-    console.log(this.coleccionUsuarios)
+    /*console.log(credenciales);
+    console.log(this.coleccionUsuarios)*/
+
+    //llamamos a la funcion para vaciar el formulario
+    this.limpiarInputs();
+  }
+  limpiarInputs(){
+    const input = {
+      uid:this.usuarios.uid = '',
+      nombre:this.usuarios.nombre = '',
+      apellido:this.usuarios.apellido ='',
+      rol:this.usuarios.rol ='',
+      email:this.usuarios.email ='',
+      password:this.usuarios.password = '',
+    }
   }
 }

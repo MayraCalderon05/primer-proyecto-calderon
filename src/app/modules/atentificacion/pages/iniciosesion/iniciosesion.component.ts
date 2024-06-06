@@ -8,9 +8,10 @@ import { Usuario } from 'src/app/models/usuario';
 })
 export class IniciosesionComponent {
   hide = true;
+  sesionUsuarios: Usuario[]
 
   //importacion del modelo/interfaz de los datos necesarios
-  usuarioIngresa: Usuario = {
+  public usuarioIngresa: Usuario = {
     uid: '',
     nombre: '',
     apellido: '',
@@ -20,40 +21,52 @@ export class IniciosesionComponent {
   }
 
   //coleccion de cuentas predeterminadas
-  sesionUsuarios: Usuario[] = [
-    {
-      uid: '',
-      nombre: 'oreo',
-      apellido: 'galleta',
-      email: 'oreog@gmail.com',
-      rol: 'admin',
-      password: 'oreo1234'
-    },
-    {
-      uid: '',
-      nombre: 'acer',
-      apellido: 'computadora',
-      email: 'compuacer@gmail.com',
-      rol: 'admin',
-      password: '1234acer'
-    },
-    {
-      uid: '',
-      nombre: 'donsatur',
-      apellido: 'bizcochitos',
-      email: 'donbizcocho@gmail.com',
-      rol: 'visit',
-      password: 'bizcochito000'
-    },
-  ]
+  constructor() {
+    this.sesionUsuarios = [
+      {
+        uid: '',
+        nombre: 'oreo',
+        apellido: 'galleta',
+        email: 'oreog@gmail.com',
+        rol: 'admin',
+        password: 'oreo1234'
+      },
+      {
+        uid: '',
+        nombre: 'acer',
+        apellido: 'computadora',
+        email: 'compuacer@gmail.com',
+        rol: 'admin',
+        password: '1234acer'
+      },
+      {
+        uid: '',
+        nombre: 'donsatur',
+        apellido: 'bizcochitos',
+        email: 'donbizcocho@gmail.com',
+        rol: 'visit',
+        password: 'bizcochito000'
+      },
+    ]
+  }
 
-  iniciarSesion(){
+  iniciarSesion() {
+    //las credenciales son todo lo que el usuario envia desde el formulario
+    const credenciales = {
+      email: this.usuarioIngresa.email,
+      password: this.usuarioIngresa.password
+    }
+    //recorre el arreglo de sesionUsuarios
     for (let i = 0; i < this.sesionUsuarios.length; i++) {
-      if ((this.usuarioIngresa.email === this.sesionUsuarios[i].email) && (this.usuarioIngresa.password === this.sesionUsuarios[i].password)) {
-        alert("Usted ha iniciado sesión")
+      const usuarioLocal = this.sesionUsuarios[i];
+      //compara uno por uno los atributos de un objeto local con lo que ingresa del usuario
+      if (usuarioLocal.email === credenciales.email && usuarioLocal.password === credenciales.password) {
+        alert("iniciaste sesión correctamente")
+        //frenamos el bucle
       } else {
-        alert("Los datos son incorrectos")
+        alert("no se pudo iniciar sesion")
       }
+
     }
   }
 }
