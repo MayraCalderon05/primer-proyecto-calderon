@@ -8,6 +8,7 @@ import { Usuario } from 'src/app/models/usuario';
 })
 export class IniciosesionComponent {
   hide = true;
+  //declario la siguiente variable para los usuarios ya registrados y almacenarlos en un arreglo
   sesionUsuarios: Usuario[]
 
   //importacion del modelo/interfaz de los datos necesarios
@@ -72,11 +73,22 @@ export class IniciosesionComponent {
 
   //en la función iniciar sesion tiene un evento de tipo onClick
   iniciarSesion() {
-    const user = this.sesionUsuarios.find((u) => u.email === this.usuarioIngresa.email && u.password === this.usuarioIngresa.password);
-    if (user) {
-      alert("Ha iniciado sesión de manera exitosa")
-    } else{
-      ("Los datos son incorrectos")
+    /*en la constante usuario se va aguardar la informacion encontrada, en el arreglo lo que hace con la funcion find
+    es:
+    -Primero para cada objeto del arreglo se le asigna la variable user
+    -Esta variable compara la variable almacenada en el arreglo con los objetos y en este caso el email y la contraseña que ingresa el usuario desde la vista*/
+    const usuario = this.sesionUsuarios.find((user)=> user.email === this.usuarioIngresa.email && user.password === this.usuarioIngresa.password);
+    //La condicional se ejecuta en caso de que encuentre un usuario que cumpla correctamente con los datos
+    if (usuario) {
+      //En caso de que sea verdadero, manda un alerta de bienvenido y en caso de que no, marca el alerta de
+      alert(`Bienvenidx, ${usuario.nombre}, ha iniciado sesion correctamente`)
+      this.usuarioIngresa.email='';
+      this.usuarioIngresa.password='';
+    } else {
+      //en caso de que sea falso, alerta que no se ha podido iniciar sesion y borra el campo de la contraseña
+      alert("No se ha podido iniciar sesion")
+      this.usuarioIngresa.password='';
     }
   }
 }
+
