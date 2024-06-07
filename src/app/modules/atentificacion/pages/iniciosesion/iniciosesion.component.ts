@@ -50,7 +50,7 @@ export class IniciosesionComponent {
     ]
   }
 
-  iniciarSesion() {
+  /*iniciarSesion() {
     //las credenciales son todo lo que el usuario envia desde el formulario
     const credenciales = {
       email: this.usuarioIngresa.email,
@@ -66,7 +66,17 @@ export class IniciosesionComponent {
       } else {
         alert("no se pudo iniciar sesion")
       }
+      //el problema de esta solucion es que repite el arreglo por cada usuario en el arreglo
+    }
+  }*/
 
+  //en la función iniciar sesion tiene un evento de tipo onClick
+  iniciarSesion() {
+    const user = this.sesionUsuarios.find((u) => u.email === this.usuarioIngresa.email && u.password === this.usuarioIngresa.password);
+    if (user) {
+      alert("Ha iniciado sesión de manera exitosa")
+    } else{
+      ("Los datos son incorrectos")
     }
   }
 }
