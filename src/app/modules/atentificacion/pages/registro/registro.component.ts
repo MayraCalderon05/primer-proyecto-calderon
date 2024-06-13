@@ -32,7 +32,9 @@ export class RegistroComponent {
   }
 
   //funcion para el registro
-  registrar(){
+  //async = asincrónico: 
+  async registrar(){
+    /* PARA MAÑANA; borrar esta parte
     //credenciales = informacion que el usuario ingresa
     const credenciales = {
       uid:this.usuarios.uid,
@@ -46,12 +48,31 @@ export class RegistroComponent {
     this.coleccionUsuarios.push(credenciales);
     alert("te registraste correctamente")
     //por consola
-    /*console.log(credenciales);
-    console.log(this.coleccionUsuarios)*/
-
+    console.log(credenciales);
+    console.log(this.coleccionUsuarios)
+    */
+    const credenciales = {
+      email: this.usuarios.email,
+      password: this.usuarios.password
+    }
+    //res: resguarda una respuesta
+    //await: es el tiempo de espera ya que utiliza internet y va a tardar en su proceso
+    const res = await this.servicioAuth.registrar(credenciales.email, credenciales.password)
+    //el metodo then nos devuelve la respuesta esperada por la anterior promesa es decir si funciona correctamente, nos guarda la respuesta
+    .then(res => {
+      alert("Ha agregado un usuario con éxito")
+      //nos lleva a la vista de inicio
+      this.servicioRutas.navigate(['/inicio'])
+    })
+    //encapsula un error
+    .catch(error => {
+      alert('Hubo un error al registrar el usuario')
+    })
+    /*NOTA: el metodo then funciona en caso deque salga bien y el metodo catch en caso d que no funcione*/
     //llamamos a la funcion para vaciar el formulario
     this.limpiarInputs();
   }
+  
   limpiarInputs(){
     const input = {
       uid:this.usuarios.uid = '',
