@@ -1,7 +1,11 @@
 import { Component } from '@angular/core';
-import { AppModule } from 'src/app/app.module';
 //importa la interfaz de usuario
 import { Usuario } from 'src/app/models/usuario';
+
+//importar nuestro servicio de autentificacion
+import { AuthService } from '../../services/auth.service';
+//Servicio de rutas que otorga angular
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-registro',
@@ -22,6 +26,10 @@ export class RegistroComponent {
   }
   //crear una colección para usuarios
   coleccionUsuarios:Usuario[] = [];
+  //referenciamos a nuestros servicios
+  constructor(public servicioAuth:AuthService, public servicioRutas:Router){
+
+  }
 
   //funcion para el registro
   registrar(){
