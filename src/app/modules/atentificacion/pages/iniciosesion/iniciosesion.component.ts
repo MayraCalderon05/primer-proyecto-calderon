@@ -55,7 +55,7 @@ export class IniciosesionComponent {
       password: this.usuarioIngresa.password = '',
     }
   }
-
+  /*tarea: hacer un curisto de github*/
 
   //########################################################################### LOCAL
   //coleccion de cuentas predeterminadas
