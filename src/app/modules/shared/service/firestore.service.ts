@@ -15,4 +15,25 @@ export class FirestoreService {
   constructor(private database: AngularFirestore) { 
     this.usuariosCollection = this.database.collection<Usuario>('usuarios');
   }
+
+  agregarUsuario(usuario: Usuario, id:string){
+    /*generamos una promesa PURA (promete devolver un valor) y utiliza los métodos:
+    RESOLVE: promesa resuelta: funciona correctamente
+    REJECT: ocurrio alguna falla*/
+    return new Promise(async (resolve, reject)=>{
+      /* encapsula la promesa resuelta (bloque TRY) 
+        TRY Y CATCH solo se usan en servicios*/
+      try {
+        usuario.uid = id;
+        /* coleccionUsuarios envia como documento el uid y setea la informacion
+        qu ingresemos en el registro */
+        const resultado = await this.usuariosCollection.doc(id).set(usuario);
+        resolve(resultado);
+       //el bloque catch encapsulta un nuevo error en caso de que la promesa se rechace
+       //en caso de error
+      } catch(error){
+        reject (error);
+      }
+    })
+  }
 }
