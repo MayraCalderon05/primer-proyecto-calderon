@@ -15,10 +15,16 @@ import { Router } from '@angular/router';
 export class IniciosesionComponent {
   hide = true;
   //declario la siguiente variable para los usuarios ya registrados y almacenarlos en un arreglo
-  sesionUsuarios: Usuario[]
+  //sesionUsuarios: Usuario[]
+
+  constructor(public servicioAuth: AuthService,
+    public serviciosFirestore: FirestoreService,
+    public servicioRutas: Router) {
+
+  }
 
   //importacion del modelo/interfaz de los datos necesarios
-  public usuarioIngresa: Usuario = {
+  usuarioIngresa: Usuario = {
     uid: '',
     nombre: '',
     apellido: '',
@@ -27,8 +33,33 @@ export class IniciosesionComponent {
     password: '',
   }
 
+  async iniciarSesion() {
+    const credenciales = {
+      email: this.usuarioIngresa.email,
+      password: this.usuarioIngresa.password
+    }
+    const res = await this.servicioAuth.iniciosesion(credenciales.email, credenciales.password)
+      .then(res => {
+        alert('Se ha logueado con éxito');
+        this.servicioRutas.navigate(['/inicio']);
+      })
+      .catch(err => {
+        alert('Hubo un problema para iniciar sesión');
+        this.limpiarInputs();
+      })
+  }
+
+  limpiarInputs() {
+    const input = {
+      email: this.usuarioIngresa.email = '',
+      password: this.usuarioIngresa.password = '',
+    }
+  }
+
+
+  //########################################################################### LOCAL
   //coleccion de cuentas predeterminadas
-  constructor() {
+  /*constructor() {
     this.sesionUsuarios = [
       {
         uid: '',
@@ -55,7 +86,7 @@ export class IniciosesionComponent {
         password: 'bizcochito000'
       },
     ]
-  }
+  }*/
 
   /*iniciarSesion() {
     //las credenciales son todo lo que el usuario envia desde el formulario
@@ -76,13 +107,13 @@ export class IniciosesionComponent {
       //el problema de esta solucion es que repite el arreglo por cada usuario en el arreglo
     }
   }*/
-
+  /*
   //en la función iniciar sesion tiene un evento de tipo onClick
   iniciarSesion() {
-    /*en la constante usuario se va aguardar la informacion encontrada, en el arreglo lo que hace con la funcion find
+    en la constante usuario se va aguardar la informacion encontrada, en el arreglo lo que hace con la funcion find
     es:
     -Primero para cada objeto del arreglo se le asigna la variable user
-    -Esta variable compara la variable almacenada en el arreglo con los objetos y en este caso el email y la contraseña que ingresa el usuario desde la vista*/
+    -Esta variable compara la variable almacenada en el arreglo con los objetos y en este caso el email y la contraseña que ingresa el usuario desde la vista
     const usuario = this.sesionUsuarios.find((user)=> user.email === this.usuarioIngresa.email && user.password === this.usuarioIngresa.password);
     //La condicional se ejecuta en caso de que encuentre un usuario que cumpla correctamente con los datos
     if (usuario) {
@@ -95,6 +126,6 @@ export class IniciosesionComponent {
       alert("No se ha podido iniciar sesion")
       this.usuarioIngresa.password='';
     }
-  }
+  }*/
 }
 
