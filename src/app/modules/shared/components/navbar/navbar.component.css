@@ -1,4 +1,29 @@
 .example-spacer {
     flex: 1 1 auto;
 }
+
+/*
+media queris es una restricción que permite modificar la resolución u otras características de la pantalla
+Declaramos la palabra reservada MEDIA -> dispositivos pequeños como celulares
+*/
+@media (min-width:300px) and (max-width:700px){
+    mat-toolbar{
+        background-color: pink;
+    }
+    #menuInicio{
+        display: none;
+    }
+    #menuProducto{
+        display: none;
+    }
+}
+/*dispositivos más grandes como computadoras o netbooks*/
+@media (min-width:700px){
+    mat-toolbar{
+        background-color: slateblue;
+    }
+    #menuSecciones{
+        display: none;
+    }
+}
   

@@ -36,7 +36,7 @@ export class RegistroComponent {
   }
 
   //funcion para el registro
-  //async = asincrónico: 
+  //async = asincrónico: alude a lo que coincide en el tiempo
   async registrar(){
     const credenciales = {
       email: this.usuarios.email,

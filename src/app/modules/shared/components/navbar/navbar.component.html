@@ -1,12 +1,17 @@
 <mat-toolbar>
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-        <mat-icon>menu</mat-icon>
+    <button mat-icon id="menuSecciones" class="example-icon" [matMenuTriggerFor]="secciones">
+        <mat-icon>menu</mat-icon> <!--el aria label solo se usa si no está el icono-->
     </button>
+    <!--vinculamos el mat menu con el atributo anterior de matMenuTriggerFor-->
+    <mat-menu #secciones="matMenu">
+        <button mat-menu-item routerLink="/inicio">Inicio</button>
+        <button mat-menu-item [matMenuTriggerFor]="producto">Productos</button>
+    </mat-menu>
     <span>My App</span>
     <span class="example-spacer"></span>
-    <button mat-button routerLink="/inicio">Inicio</button>
+    <button mat-button routerLink="/inicio" id="menuInicio">Inicio</button>
     <!--manu desplegable para una seccion de productos configurada-->
-    <button mat-button [matMenuTriggerFor]="producto">Productos</button>
+    <button mat-button [matMenuTriggerFor]="producto" id="menuProducto">Productos</button>
     <mat-menu #producto="matMenu">
         <button mat-menu-item routerLink="/producto">Productos</button>
         <button mat-menu-item routerLink="/plantas">Plantas</button>
@@ -23,7 +28,7 @@
     </mat-menu>
 
     <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-        <mat-icon>favorite</mat-icon>
+        <mat-icon>shopping_cart</mat-icon>
     </button>
     <!-- <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
         <mat-icon>share</mat-icon>
