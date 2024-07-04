@@ -6,6 +6,9 @@ import { FirestoreService } from 'src/app/modules/shared/service/firestore.servi
 
 import { Router } from '@angular/router';
 
+//importamos las escriptaciones
+import * as CryptoJS from 'crypto-js';
+
 @Component({
   selector: 'app-iniciosesion',
   templateUrl: './iniciosesion.component.html',
@@ -37,15 +40,43 @@ export class IniciosesionComponent {
       email: this.usuarioIngresa.email,
       password: this.usuarioIngresa.password
     }
-    const res = await this.servicioAuth.iniciosesion(credenciales.email, credenciales.password)
+    try{
+      //obtenemos el usuario de la base de datos
+      const usuarioBD = await this.servicioAuth.obtenerUsuario(credenciales.email)
+      // (!) si es diferente
+      //* .empty si algo está vacío
+      if (!usuarioBD || usuarioBD.empty) {
+        alert('El correo electrónico que ingresó no está registrado');
+        this.limpiarInputs();
+        return;
+      }
+      /*primer documento registrado en a coleccion de usuarios que se obtiene desde la consulta*/
+      const usuarioDoc = usuarioBD.docs[0];
+      // extraemos los datos del documento en forma de un objeto y se especifica como de tipo "Usuario"
+      //haciendo referencia a nuestra interfaz usuario
+      const usuarioData = usuarioDoc.data() as Usuario;
+
+      //hash de la contraseña ingresada por el usuario
+      const hashedPassword = CryptoJS.SHA256(credenciales.password).toString();
+
+      if (hashedPassword !== usuarioData.password) {
+        alert("La contraseña es incorrecta");
+        this.usuarioIngresa.password = '';
+        return;
+      }
+
+      const res = await this.servicioAuth.iniciosesion(credenciales.email, credenciales.password)
       .then(res => {
         alert('Se ha logueado con éxito');
         this.servicioRutas.navigate(['/inicio']);
       })
       .catch(err => {
-        alert('Hubo un problema para iniciar sesión');
+        alert('Hubo un problema para iniciar sesión'+err);
         this.limpiarInputs();
       })
+    } catch(error){
+      this.limpiarInputs();
+    }
   }
 
   limpiarInputs() {

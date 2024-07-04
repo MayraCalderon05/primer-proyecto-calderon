@@ -7,7 +7,8 @@ import { AuthService } from '../../services/auth.service';
 import { FirestoreService } from 'src/app/modules/shared/service/firestore.service';
 //Servicio de rutas que otorga angular, metodo de navegacion
 import { Router } from '@angular/router';
-
+//importa todo de esta librería
+import * as CryptoJS from 'crypto-js';
 
 @Component({
   selector: 'app-registro',
@@ -58,6 +59,11 @@ export class RegistroComponent {
     const uid = await this.servicioAuth.obtenerUid();
     //le envia el uid que le está enviando desde el servicio auth
     this.usuarios.uid = uid;
+    //sha256 es un algoritmo de hashing que toma una entrada en este caso la contraseña y produce una 
+    // cadena de caracteres en lenguaje exadecimal que representa su HASH
+    //el toostring convierte el resultado del hash en una cadena de carácteres legible
+    this.usuarios.password = CryptoJS.SHA256(this.usuarios.password).toString();
+    //guarda la informacion del usuario en la colección
     this.guardarUsuario();
     /*NOTA: el metodo then funciona en caso deque salga bien y el metodo catch en caso d que no funcione*/
     //llamamos a la funcion para vaciar el formulario
