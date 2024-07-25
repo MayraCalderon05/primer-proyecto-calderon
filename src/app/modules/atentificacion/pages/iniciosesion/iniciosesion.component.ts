@@ -3,11 +3,13 @@ import { Usuario } from 'src/app/models/usuario';
 //importacion de los servicios
 import { AuthService } from '../../services/auth.service';
 import { FirestoreService } from 'src/app/modules/shared/service/firestore.service';
-
+//servicio de rutas de angular
 import { Router } from '@angular/router';
-
 //importamos las escriptaciones
 import * as CryptoJS from 'crypto-js';
+//importamos paquetería de sweet alert para alertas personalizadas
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-iniciosesion',
@@ -46,7 +48,11 @@ export class IniciosesionComponent {
       // (!) si es diferente
       //* .empty si algo está vacío
       if (!usuarioBD || usuarioBD.empty) {
-        alert('El correo electrónico que ingresó no está registrado');
+        Swal.fire({
+          title: "¡Error!",
+          text: "El correo electrónico que ingresó no está registrado",
+          icon: "warning"
+        });
         this.limpiarInputs();
         return;
       }
@@ -60,18 +66,30 @@ export class IniciosesionComponent {
       const hashedPassword = CryptoJS.SHA256(credenciales.password).toString();
 
       if (hashedPassword !== usuarioData.password) {
-        alert("La contraseña es incorrecta");
+        Swal.fire({
+          title: "¡Cuidado!",
+          text: "La contraseña es incorrecta",
+          icon: "warning"
+        });
         this.usuarioIngresa.password = '';
         return;
       }
 
       const res = await this.servicioAuth.iniciosesion(credenciales.email, credenciales.password)
       .then(res => {
-        alert('Se ha logueado con éxito');
+        Swal.fire({
+          title: "¡Buen trabajo!",
+          text: "Se pudo loguear con éxito",
+          icon: "success"
+        });
         this.servicioRutas.navigate(['/inicio']);
       })
       .catch(err => {
-        alert('Hubo un problema para iniciar sesión'+err);
+        Swal.fire({
+          title: "¡Oh no!",
+          text: "Hubo un problema al registrar el nuevo usuario :("+ err,
+          icon: "error"
+        });
         this.limpiarInputs();
       })
     } catch(error){

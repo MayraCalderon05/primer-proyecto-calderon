@@ -9,6 +9,9 @@ import { FirestoreService } from 'src/app/modules/shared/service/firestore.servi
 import { Router } from '@angular/router';
 //importa todo de esta librería
 import * as CryptoJS from 'crypto-js';
+//importamos paquetería de sweet alert para alertas personalizadas
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-registro',
@@ -29,7 +32,7 @@ export class RegistroComponent {
   }
   //crear una colección para usuarios
   coleccionUsuarios:Usuario[] = [];
-  //referenciamos a nuestros servicios
+  //! referenciamos a nuestros servicios
   constructor(public servicioAuth:AuthService, 
               public servicioRutas:Router, 
               public servicioFirestore:FirestoreService){
@@ -48,13 +51,22 @@ export class RegistroComponent {
     const res = await this.servicioAuth.registrar(credenciales.email, credenciales.password)
     //el metodo then nos devuelve la respuesta esperada por la anterior promesa es decir si funciona correctamente, nos guarda la respuesta
     .then(res => {
-      alert("Ha agregado un usuario con éxito")
+      //- alerta sacada de sweet alert
+      Swal.fire({
+        title: "¡Buen trabajo!",
+        text: "Se pudo registrar con éxito",
+        icon: "success"
+      });
       //nos lleva a la vista de inicio
       this.servicioRutas.navigate(['/inicio'])
     })
     //encapsula un error
     .catch(error => {
-      alert('Hubo un error al registrar el usuario')
+      Swal.fire({
+        title: "¡Oh no!",
+        text: "Hubo un problema al registrar el nuevo usuario :(",
+        icon: "error"
+      });
     })
     const uid = await this.servicioAuth.obtenerUid();
     //le envia el uid que le está enviando desde el servicio auth
