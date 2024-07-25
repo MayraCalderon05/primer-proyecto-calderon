@@ -10,7 +10,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
   providedIn: 'root'
 })
 export class AuthService {
-  //referenciar auth de firebase para inicializarlo
+  //! referenciar auth de firebase para inicializarlo
   constructor(
     private auth:AngularFireAuth,
     private servicioFirestore:AngularFirestore) { }

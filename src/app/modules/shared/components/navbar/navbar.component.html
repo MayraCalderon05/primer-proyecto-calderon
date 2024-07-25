@@ -20,11 +20,12 @@
     </mat-menu>
 
     <span class="example-spacer"></span>
-    <!--manu desplegable para el inicio de sesion y el formulario de registro-->
+    <!--manu desplegable para el manejo de (inicio de sesion y el formulario de registro) y de cierre de sesion-->
     <button mat-icon-button [matMenuTriggerFor]="usuario"><mat-icon>person</mat-icon></button>
     <mat-menu #usuario="matMenu">
-        <button mat-menu-item routerLink="/registro">Registro</button>
-        <button mat-menu-item routerLink="/iniciosesion">Iniciar sesión</button>
+        <button mat-menu-item (click)="iniciarSesion()" *ngIf="logueado" routerLink="/registro">Registro</button>
+        <button mat-menu-item (click)="iniciarSesion()" *ngIf="logueado" routerLink="/iniciosesion">Iniciar sesión</button>
+        <button mat-menu-item (click)="cerrarSesion()" *ngIf="deslogueado">Cerrar sesión</button>
     </mat-menu>
 
     <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
