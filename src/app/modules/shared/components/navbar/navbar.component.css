@@ -26,4 +26,7 @@ Declaramos la palabra reservada MEDIA -> dispositivos pequeños como celulares
         display: none;
     }
 }
-  
+.roboto-letter {
+    font-family: "Roboto Slab", serif;
+    font-size: 25px;
+}
