@@ -13,7 +13,8 @@ const routes: Routes = [
   //()=> nos importa la ruta de donde viene el modulo
   {path:"",loadChildren:()=>import('./modules/inicio/inicio.module').then(m=>m.InicioModule)},
   {path:"",loadChildren:()=>import('./modules/productos/productos.module').then(m=>m.ProductosModule)},
-  {path:"",loadChildren:()=>import('./modules/atentificacion/atentificacion.module').then(m=>m.AtentificacionModule)}
+  {path:"",loadChildren:()=>import('./modules/atentificacion/atentificacion.module').then(m=>m.AtentificacionModule)},
+  {path:"",loadChildren:()=>import('./modules/admin/admin.module').then(m=>m.AdminModule)}
 ];
 
 @NgModule({
