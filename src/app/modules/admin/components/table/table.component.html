@@ -14,7 +14,7 @@
         <tr *ngFor="let producto of coleccionProductos">
             <th scope="row">1</th>
             <td>
-                <img src="{{producto.img}}" alt="{{producto.alt}}">
+                <img src="{{producto.img}}" alt="{{producto.alt}}" height="100px">
             </td>
             <td>{{producto.nombre}}</td>
             <td>{{producto.precio}}</td>
@@ -22,11 +22,15 @@
             <td>{{producto.categoria}}</td>
 
             <!--acciones-->
-            <td><button id="btn-edit" title="Editar" type="button" class="btn btn-outline-warning">
+            <!--mostrar editar tambien va a editar el produtco seleccionado o iterado en esa fila-->
+            <td><button id="btn-edit" title="Editar" type="button" class="btn btn-outline-warning"
+                data-bs-toggle="modal" data-bs-target="#editarProducto">
                     <mat-icon>edit</mat-icon>
                 </button></td>
-            <td><button id="btn-delete" title="Eliminar" type="button" class="btn btn-outline-danger">
-                    <mat-icon>delete</mat-icon>
+                <!--mostrar borrar recibe como parametro el producto seleccionado en esa fila-->
+            <td><button id="btn-delete" title="Eliminar" type="button" class="btn btn-outline-danger" 
+                data-bs-toggle="modal" data-bs-target="#eliminarProducto" (click)="mostrarBorrar(producto)">
+                     <mat-icon>delete</mat-icon>
                 </button></td>
         </tr>
     </tbody>
@@ -63,8 +67,8 @@
                     <label class="form-label">Seleccione la categoria del producto:</label>
                     <select class="form-control form-select" formControlName="categoria">
                         <option selected>Elija una opción</option>
-                        <option value="flores">Con flores y semillas</option>
-                        <option value="sinflores">Sin flores y semillas</option>
+                        <option value="Con flores y semillas">Con flores y semillas</option>
+                        <option value="Sin flores y semillas">Sin flores y semillas</option>
                     </select>
                 </div>
                 <div class="mb-3">
@@ -84,3 +88,25 @@
         </div>
     </div>
 </div>
+
+<!--modal para eliminar producto-->
+<div class="modal fade" id="eliminarProducto" *ngIf="modalVisibleProducto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">¿Estás seguro de eliminar el producto?</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <!--CUERPO DEL MDOAL-->
+        <div class="modal-body">
+            <!--Mostramos al usuario la iformacion del producto que vamos a eliminar-->
+          {{productoSeleccionado.nombre}}
+          <img src="{{productoSeleccionado.img}}" alt="{{productoSeleccionado.alt}}" width="100%">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="borrarProducto()">Borrar</button>
+          <button type="button" class="btn btn-primary">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>

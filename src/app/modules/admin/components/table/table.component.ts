@@ -80,7 +80,40 @@ export class TableComponent {
       alert('El producto se ha eliminado correctamente')
     })
     .catch(error =>{
-      alert('No se ha podido eliminar el producto'+error);
+      //TODO \n se utiliza para realizar un salto de linea
+    alert('No se ha podido eliminar el producto ? \n'+error);
     });
+  }
+
+  mostrarEditar(productoSeleccionado: Producto){
+    this.productoSeleccionado = productoSeleccionado;
+    //!setear los nuevos valores para reasignarlos y el id no se vuelve a enviar ni se modfica, por ende no lo llamamos
+    this.producto.setValue({
+      nombre:productoSeleccionado.nombre,
+      precio:productoSeleccionado.precio,
+      descripcion:productoSeleccionado.descripcion,
+      img:productoSeleccionado.img,
+      alt:productoSeleccionado.alt,
+      categoria:productoSeleccionado.categoria
+    })
+  }
+
+  editarProducto(){
+    let datos: Producto = {
+      idProducto: this.productoSeleccionado.idProducto,
+      nombre: this.producto.value.nombre!,
+      precio:this.producto.value.precio!,
+      descripcion:this.producto.value.descripcion!,
+      img:this.producto.value.img!,
+      alt:this.producto.value.alt!,
+      categoria:this.producto.value.categoria!
+    }
+    this.servicioCrud.modificarProducto(this.productoSeleccionado.idProducto, datos)
+    .then(producto => {
+      alert('El producto fue modificado con éxito');
+    })
+    .catch(error => {
+      alert('Hubo un problema para modificar el producto');
+    })
   }
 }
