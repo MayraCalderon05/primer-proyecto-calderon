@@ -7,6 +7,8 @@ import { PlantasComponent } from './pages/plantas/plantas.component';
 import { HerramientasComponent } from './pages/herramientas/herramientas.component';
 import { RecursosComponent } from './pages/recursos/recursos.component';
 import { ProductoComponent } from './pages/producto/producto.component';
+import { CardsComponent } from './components/cards/cards.component';
+import { CardJuguetesComponent } from './components/card-juguetes/card-juguetes.component';
 
 
 @NgModule({
@@ -14,7 +16,9 @@ import { ProductoComponent } from './pages/producto/producto.component';
     PlantasComponent,
     HerramientasComponent,
     RecursosComponent,
-    ProductoComponent
+    ProductoComponent,
+    CardsComponent,
+    CardJuguetesComponent
   ],
   imports: [
     CommonModule,
@@ -24,7 +28,9 @@ import { ProductoComponent } from './pages/producto/producto.component';
     PlantasComponent,
     HerramientasComponent,
     RecursosComponent,
-    ProductoComponent
+    ProductoComponent,
+    CardsComponent,
+    CardJuguetesComponent
   ]
 })
 export class ProductosModule { }
